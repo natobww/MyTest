@@ -5,45 +5,30 @@
                 android:padding="8dp"
                 tools:context=".MainActivity">
 
-    <com.rongs.hanj.apptanmudemo.MyVideoView
-        android:id="@+id/mm"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tanmu_container"
         android:layout_marginTop="10dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <Button
+            android:onClick="click"
             android:id="@+id/startTanmu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="开始弹幕"
             android:textSize="18sp"/>
-
-        <!--<Button
-            android:id="@+id/clearTanmu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_weight="1"
-            android:text="停止弹幕"
-            android:textSize="18sp" />-->
     </LinearLayout>
 
     <RelativeLayout
-        android:background="#66adcdef"
         android:id="@+id/tanmu_container"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
+        android:layout_alignParentStart="true"
+        android:background="#66adcdef">
     </RelativeLayout>
 
 </RelativeLayout>

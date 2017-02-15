@@ -31,10 +31,24 @@ public class AnimationHelper {
     public static Animation  createVerticalTranslateAnim(Context context, int fromY, int toY) {
         TranslateAnimation tlAnim = new TranslateAnimation(0, 0, fromY, toY);
         //自动计算时间
-        long duration = (long) (Math.abs(toY - fromY) * 1.0f / ScreenUtils.getScreenH(context) * 10000);
+        long duration = (long) (Math.abs(toY - fromY) * 1.0f / ScreenUtils.getScreenH(context) * 15000);
         tlAnim.setDuration(duration);
         tlAnim.setInterpolator(new LinearInterpolator());
         tlAnim.setFillAfter(true);
+        return tlAnim;
+    }
+
+    /**
+     * 创建平移动画
+     */
+    public static Animation createTranslateAnim(Context context, int fromX, int toX) {
+        TranslateAnimation tlAnim = new TranslateAnimation(fromX, toX, 0, 0);
+        //自动计算时间
+        long duration = (long) (Math.abs(toX - fromX) * 1.0f / ScreenUtils.getScreenW(context) * 4000);
+        tlAnim.setDuration(duration);
+        tlAnim.setInterpolator(new LinearInterpolator());
+        tlAnim.setFillAfter(true);
+
         return tlAnim;
     }
 }
