@@ -2,23 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:background="@drawable/danmu_back"
               android:gravity="center_vertical"
               android:orientation="horizontal">
 
     <ImageView
-        android:src="@drawable/ic_default_circle"
+        android:id="@+id/mmmm"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/imageView"/>
+        android:src="@drawable/ic_default_circle"/>
 
     <TextView
-        android:textSize="25sp"
-        android:gravity="center_vertical"
+        android:lines="1"
         android:id="@+id/hhhh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="hahahahahaha"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center_vertical"
+        android:text="hahahahahaha"
+        android:textSize="20sp"/>
 
 
 </LinearLayout>

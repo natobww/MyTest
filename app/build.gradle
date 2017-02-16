@@ -26,4 +26,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:22.+'
     testCompile 'junit:junit:4.12'
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.zhy:okhttputils:2.0.0'
 }

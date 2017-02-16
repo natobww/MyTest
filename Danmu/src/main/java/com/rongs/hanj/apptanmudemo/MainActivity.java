@@ -45,13 +45,7 @@ public class MainActivity extends ActionBarActivity {
         tanmuBean.setItems(new String[]{"测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
                 "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
                 "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！",
-                "哪位大神可以帮帮我啊？", "I need your help.", "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
-                "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
-                "测试一下", "弹幕这东西真不好做啊", "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
-                "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
-                "测试一下", "弹幕这东西真不好做啊", "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
-                "测试一下", "弹幕这东西真不好做啊", "总是出现各种问题~~", "也不知道都是为什么？麻烦！", "哪位大神可以帮帮我啊？", "I need your help.",
-                "测试一下", "弹幕这东西真不好做啊",});
+                "哪位大神可以帮帮我啊？", "I need your help."});
 
         handler = new MyHandler(this);
     }
@@ -61,23 +55,28 @@ public class MainActivity extends ActionBarActivity {
             return;
         }
         existMarginValues.clear();
-        new Thread(new CreateTanmuThread()).start();
+        new Thread() {
+            @Override
+            public void run() {
+                int N = tanmuBean.getItems().length;
+                for (int i = 0; i < N; i++) {
+                    handler.obtainMessage(1, i, 0).sendToTarget();
+                    SystemClock.sleep(3000);
+                }
+            }
+        }.start();
     }
 
     //每2s自动添加一条弹幕  
-    private class CreateTanmuThread implements Runnable {
+    public class CreateTanmuThread implements Runnable {
         @Override
         public void run() {
-            int N = tanmuBean.getItems().length;
-            for (int i = 0; i < N; i++) {
-                handler.obtainMessage(1, i, 0).sendToTarget();
-                SystemClock.sleep(2000);
-            }
+
         }
     }
 
     //需要在主线城中添加组件  
-    private static class MyHandler extends Handler {
+    private class MyHandler extends Handler {
         private WeakReference<MainActivity> ref;
 
         MyHandler(MainActivity ac) {
@@ -89,28 +88,25 @@ public class MainActivity extends ActionBarActivity {
             super.handleMessage(msg);
 
             if (msg.what == 1) {
-                MainActivity ac = ref.get();
+                final MainActivity ac = ref.get();
                 if (ac != null && ac.tanmuBean != null) {
                     int index = msg.arg1;
-                    String content = ac.tanmuBean.getItems()[index];
-                    float textSize = (float) (ac.tanmuBean.getMinTextSize() * (1 + Math.random() * ac.tanmuBean.getRange()));
-                    int textColor = ac.tanmuBean.getColor();
+                    final String content = ac.tanmuBean.getItems()[index];
+                    final float textSize = (float) (ac.tanmuBean.getMinTextSize() * (1 + Math.random() * ac.tanmuBean.getRange()));
+                    final int textColor = ac.tanmuBean.getColor();
 
-                    ac.showTanmu(content, textSize, textColor);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ac.showTanmu(content, textSize, textColor);
+                        }
+                    });
                 }
             }
         }
     }
 
     private void showTanmu(String content, float textSize, int textColor) {
-       /* final TextView hah = new TextView(this);
-
-        hah.setTextSize(textSize);
-        hah.setText(content);
-        hah.setSingleLine();
-        hah.setTextColor(textColor);*/
-
-
         mHah = (LinearLayout) LayoutInflater.from(getBaseContext()).inflate(R.layout.hahha, null);
         TextView hhh = (TextView) mHah.findViewById(R.id.hhhh);
         hhh.setText(content);
@@ -121,7 +117,6 @@ public class MainActivity extends ActionBarActivity {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         params.topMargin = verticalMargin;
-
         mHah.setLayoutParams(params);
         Animation anim = AnimationHelper.createTranslateAnim(this, leftMargin, -ScreenUtils.getScreenW(this));
         anim.setAnimationListener(new Animation.AnimationListener() {
@@ -158,25 +153,16 @@ public class MainActivity extends ActionBarActivity {
             validHeightSpace = containerVG.getBottom() - containerVG.getTop()
                     - containerVG.getPaddingTop() - containerVG.getPaddingBottom();
         }
-
-        //计算可用的行数  
-      /*  if (linesCount == 0) {
-            linesCount = validHeightSpace / ScreenUtils.dp2px(this, tanmuBean.getMinTextSize() * (1 + tanmuBean.getRange()));
-            if (linesCount == 0) {
-                throw new RuntimeException("Not enough space to show text.");
-            }
-        }*/
         if (linesCount == 0) {
-            linesCount = validHeightSpace / ScreenUtils.dp2px(this, mHah.getHeight());
+            linesCount = validHeightSpace / ScreenUtils.dp2px(this, tanmuBean.getMinTextSize());
             if (linesCount == 0) {
                 throw new RuntimeException("Not enough space to show text.");
             }
         }
-
         //检查重叠  
         while (true) {
             int randomIndex = (int) (Math.random() * linesCount);
-            int marginValue = randomIndex * (validHeightSpace / linesCount);
+            int marginValue = randomIndex * (validHeightSpace / (linesCount + 2));
             if (!existMarginValues.contains(marginValue)) {
                 existMarginValues.add(marginValue);
                 return marginValue;

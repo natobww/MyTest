@@ -1,4 +1,4 @@
-package com.rongs.hanj.apptanmudemo;
+package com.example.bgfvg.test;
 
 import android.graphics.Color;
 
@@ -14,8 +14,8 @@ public class TanmuBean {
 
     public TanmuBean() {
         //init default value
-        color = Color.parseColor("#FF5500");
-        minTextSize = 25;
+        color = Color.parseColor("#ffffff");
+        minTextSize = 20;
         range = 0f;
     }
 
