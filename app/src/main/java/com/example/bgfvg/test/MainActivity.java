@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String palyUrl = "http://1.180.208.170/sohu/v1/TmwCqEIsRhWHDp4N84wVyYdiWtoARKkLhF1O04fNbFXUyYbSoO2VqVw.mp4?k=oHs0vY&p=XZxIWhoBoJ2svm1BqVPcNmsdytP&r=TmI20LscWOo70Sc2ZD6Sqt8IS3eslDbJkDbtZ5Nak7gaUDQEwah0whesaOGECBfjvJAt6ODOfoIWG1XvmXAyBj&q=OpC3hW7IWDodRDbsfhvSotE7ZDNslGvOWBXOfJeHfJ1S0F2OfFyXfBvtfGoURD64RYoUZDJ&cip=61.237.225.20";
+        String palyUrl = "http://data.vod.itc.cn/?rb=1&prot=1&key=jbZhEJhlqlUN-Wj_HEI8BjaVqKNFvDrn&prod=flash&pt=1&new=/117/156/StuOUSwDQyy6LdVkSMhR9A.mp4";
         mVideoView.setVideoURI(Uri.parse(palyUrl));
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     private Set<Integer> existMarginValues = new HashSet<>();
 
     private void disPlay(String content, float textSize, int textColor, int index) {
-        mDanMulayout = (LinearLayout) LayoutInflater.from(getBaseContext()).inflate(R.layout.hahha, null);
+        mDanMulayout = (LinearLayout) LayoutInflater.from(getBaseContext()).inflate(R.layout.danmu, null);
         mDanmuTextView = (TextView) mDanMulayout.findViewById(R.id.hhhh);
         mDanmuImageView = (ImageView) mDanMulayout.findViewById(R.id.mmmm);
         mDanmuTextView.setText(content);

@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Danmu/Danmu.iml" filepath="$PROJECT_DIR$/Danmu/Danmu.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyTest.iml" filepath="$PROJECT_DIR$/MyTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app11/app11.iml" filepath="$PROJECT_DIR$/app11/app11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/monidanmu2/monidanmu2.iml" filepath="$PROJECT_DIR$/monidanmu2/monidanmu2.iml" />
     </modules>
   </component>
 </project>
